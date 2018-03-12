@@ -1,0 +1,130 @@
+#brand-image {
+    margin-top: -10px;
+}
+
+.nav-item {
+    font-size: 20px;
+    margin-top:10px;
+    font-family: 'Convergence', sans-serif;
+}
+
+.navbarfill
+{
+    color:#e41318;
+}
+.nav-item:hover {
+    text-decoration: underline;
+}
+
+#heading1 {
+    margin: 2vh 0;
+    color: #ff0000;
+    text-shadow: 5px 5px 3px grey;
+    font-family: 'Convergence', sans-serif;
+}
+
+#heading2 {
+    margin: 2vh 0;
+    color: #ff0000;
+    text-shadow: 2px 2px 1px grey;
+    font-family: 'Convergence', sans-serif;
+} 
+
+#main {
+    margin: 10vh auto;
+}
+
+#start-button {
+    color: #0e6c95;
+    font-family: 'Convergence', sans-serif;
+    font-size: 20px;
+    margin: 5vh;
+}
+
+form {
+    margin: 20px 0;
+}
+
+.container-fluid {
+    background-image: url("../images/banner.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 400px;
+    box-shadow: 10px 10px 5px grey;
+}
+
+
+#input-form {
+    text-align: center;
+    margin-top: 5em;
+    background-color: #4B90D5;
+}
+
+#input-col {
+    margin-left: 1em;
+    margin-top: 1em;
+}
+
+#registration-form, #search-form, #signup-form, #photo-block, #info-block {
+    margin: 5em auto;
+}
+
+#photo-output-block {
+    margin: 2em 0;
+}
+
+.modal-content {
+    background-image: url("../images/modal.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.modal-body {
+    background: rgba(0, 0, 0, .5);
+}
+
+.modal-title, #modal-cancel, #modal-label {
+    color: white;
+    text-shadow: 2px 2px 8px #000000;
+}
+
+#images-div, #details-div {
+    margin: 3em 0;
+}
+
+#property-description, #new-div {
+    margin: 1em 0;
+}
+
+/*Extra small devices (portrait phones, less than 576px)
+ No media query since this is the default in Bootstrap
+
+ Small devices (landscape phones, 576px and up)*/
+@media (max-width: 576px) { 
+    #heading1 {
+        font-size: 24px 
+    }
+
+    #heading2 {
+        font-size: 20px;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 768px) { 
+    #heading1 {
+        font-size: 28px;
+    }
+
+    #heading2 {
+        font-size: 20px;
+    }
+
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (max-width: 992px) {
+    #heading1 {
+        font-size: 32px;
+    }
+}
