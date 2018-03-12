@@ -1,5 +1,6 @@
 #brand-image {
     margin-top: -10px;
+    width: 150px;
 }
 
 .nav-item {
@@ -8,9 +9,14 @@
     font-family: 'Convergence', sans-serif;
 }
 
-.navbarfill
+#scrapeButton{
+    margin-top:-10px;
+}
+
+.navbar-light
 {
-    color:#e41318;
+    background-color:#e41318;
+    height:50px;
 }
 .nav-item:hover {
     text-decoration: underline;
