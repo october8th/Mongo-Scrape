@@ -45,14 +45,14 @@ app.get("/scrape", function(req, res) {
     db.Scraped.remove({}, function(err) { 
       console.log('collection removed') 
     });
-    $("div.info-wrap").each(function(i, element) {
-      howMany++;
-      var result = {};
-      var link = $(element).children("p.heading").children("a.accent-hover").attr("href");
-      var title = $(element).children("p.heading").children("a.accent-hover").children("span.accent-hover").text();
-      var text = $(element).children("p.text").text();
+    $("div.item-wrap").each(function(i, element) {
+      var image =$(element).children("div.image").children("a.img").find("img").attr("src");
+      var link = $(element).children("div.info").children("div.info-wrap").children("p.heading").children("a.accent-hover").attr("href");
+      var title = $(element).children("div.info").children("div.info-wrap").children("p.heading").children("a.accent-hover").children("span.accent-hover").text();
+      var text = $(element).children("div.info").children("div.info-wrap").children("p.text").text();
 
       // Save these results in an object that we'll push into the results array we defined earlier
+      result.image = image;
       result.title = title;
       result.link = link;
       result.story = text;
