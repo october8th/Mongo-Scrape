@@ -72,7 +72,7 @@ $(document).on("click", "#savenote", function() {
 });
 
 function showArticles(data)
-{
+{console.log("data length: " + data.length);
   // Empty the notes from the note section
   $("#main").empty();
   for (var i = 0; i < data.length; i++) {
