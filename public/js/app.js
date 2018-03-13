@@ -119,7 +119,7 @@ $(document).on("click", ".btn-success", function()
   // Empty the notes from the note section
   $.ajax({
     method: "GET",
-    url: "/save:" + $(this).data("id") 
+    url: "/save/" + $(this).data("id") 
   })
     // With that done, add the note information to the page
     .then(getArticles());
