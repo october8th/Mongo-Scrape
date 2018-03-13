@@ -84,7 +84,7 @@ function getArticles()
     .then(function(data) {
       for (var i = 0; i < data.length; i++) {
         // Display the apropos information on the page
-        $("#main").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + data[i].story + "<br />" + "</p>");
+        $("#main").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].image +data[i].link + data[i].story + "<br />" + "</p>");
       };
     });
 }
