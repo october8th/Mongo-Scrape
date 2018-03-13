@@ -292,7 +292,7 @@
 				</div>
 			</div>
 		
-		<!--Booking Modal-->
+		<!--Notes Modal-->
 			<div class="modal fade" id="noteIt" tabindex="-1" role="dialog" aria-labelledby="bookIt-contact" aria-hidden="true">
 			  <div class="modal-dialog" role="document">
 			 <div class="modal-dialog" role="document">
@@ -307,6 +307,16 @@
 							<div id="note-section">
 									
 							</div>
+							<div id ="note-form">
+								<form method="POST" action="/save-note">
+									<div class="form-group row">
+										<label for="description">Add a note:</label>
+										<textarea class="form-control" id="newNote" rows="4" name="newNote" required></textarea>
+									</div>
+									<input type="submit" value="Add New Note">
+								</form>
+							</div>
+
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal" id="noteOK">Close</button>
