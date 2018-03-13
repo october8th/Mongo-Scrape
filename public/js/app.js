@@ -71,29 +71,32 @@ $(document).on("click", "#savenote", function() {
   $("#bodyinput").val("");
 });
 
-function getArticles()
+function showArticles(data)
 {
   // Empty the notes from the note section
   $("#main").empty();
+  for (var i = 0; i < data.length; i++) {
+    // Display the apropos information on the page
+    var myHTML = "<div class='card' style='width: 70rem;'> <div class='card-body'>";
+    myHTML += "<h5 class='card-title'>" + data[i].title + "</h5>";
+    myHTML += "<img style='border:1px solid gray;width:150px;height:100px; float:right' src=" + data[i].image +">";
+    myHTML += "<p class='card-text'>" + data[i].story+ "</p>";
+    myHTML += "<a href='" + data[i].link + "'" +"class='btn btn-primary' target='_blank'>View Article</a>";
+    myHTML += "<a href='#' data-id='" + data[i]._id + "' class='btn btn-success'>Save Article</a></div></div>";
+    $("#main").append(myHTML);
+    //.append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].image +data[i].link + data[i].story + "<br />" + "</p>");
+  };
+}
+
+function getNewArticles()
+{
   // Now make an ajax call for the Articles
   $.ajax({
     method: "GET",
     url: "/scraperesults"
   })
     // With that done, add the note information to the page
-    .then(function(data) {
-      for (var i = 0; i < data.length; i++) {
-        // Display the apropos information on the page
-        var myHTML = "<div class='card' style='width: 70rem;'> <div class='card-body'>";
-        myHTML += "<h5 class='card-title'>" + data[i].title + "</h5>";
-        myHTML += "<img style='border:1px solid gray;width:150px;height:100px; float:right' src=" + data[i].image +">";
-        myHTML += "<p class='card-text'>" + data[i].story+ "</p>";
-        myHTML += "<a href='" + data[i].link + "'" +"class='btn btn-primary' target='_blank'>View Article</a>";
-        myHTML += "<a href='#' data-id='" + data[i]._id + "' class='btn btn-success'>Save Article</a></div></div>";
-        $("#main").append(myHTML);
-        //.append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].image +data[i].link + data[i].story + "<br />" + "</p>");
-      };
-    });
+    .then(showArticles(data));
 }
 
 // Whenever someone scrapes
@@ -109,7 +112,7 @@ $(document).on("click", "#scrapeButton", function()
     // With that done, add the note information to the page
     .then(function(data) {
       $("#scrape-status").text(data);
-      getArticles();
+      getNewArticles();
       });
 });
 
@@ -122,5 +125,5 @@ $(document).on("click", ".btn-success", function()
     url: "/save/" + $(this).data("id") 
   })
     // With that done, add the note information to the page
-    .then(getArticles());
+    .then(getNewArticles());
 });
