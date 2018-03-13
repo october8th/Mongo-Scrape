@@ -41,14 +41,17 @@ app.get("/reset", function(req, res) {
 });
 
 // A GET route for scraping the echojs website
-app.get("/scrape", function(req, res) {
+app.get("/scrape", function(req, res) 
+{
   // First, we grab the body of the html with request
-  axios.get("http://www.nintendolife.com/news/").then(function(response) {
+  axios.get("http://www.nintendolife.com/news/").then(function(response) 
+  {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
     var howMany = 0;
     
-    $("div.item-wrap").each(function(i, element) {
+    $("div.item-wrap").each(function(i, element) 
+    {
       var result = {};
       var image =$(element).children("div.image").children("a.img").find("img").attr("src");
       var link = $(element).children("div.info").children("div.info-wrap").children("p.heading").children("a.accent-hover").attr("href");
@@ -78,6 +81,7 @@ app.get("/scrape", function(req, res) {
             return res.json(err);
           });
         }
+      });
     });
     // If we were able to successfully scrape and save an Article, send a message to the client
     res.send("Grabbed the newest " + howMany + " articles.");
