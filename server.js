@@ -34,6 +34,11 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nintendoScraper
 });
 
 // Routes
+app.get("/reset", function(req, res) {
+  db.Article.remove({}, function(err) { 
+      console.log('collection removed') 
+    });
+});
 
 // A GET route for scraping the echojs website
 app.get("/scrape", function(req, res) {
@@ -42,11 +47,8 @@ app.get("/scrape", function(req, res) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
     var howMany = 0;
-    db.Scraped.remove({}, function(err) { 
-      console.log('collection removed') 
-    });
+    
     $("div.item-wrap").each(function(i, element) {
-      howMany++;
       var result = {};
       var image =$(element).children("div.image").children("a.img").find("img").attr("src");
       var link = $(element).children("div.info").children("div.info-wrap").children("p.heading").children("a.accent-hover").attr("href");
@@ -60,15 +62,22 @@ app.get("/scrape", function(req, res) {
       result.story = text;
 
       // Create a new Article using the `result` object built from scraping
-      db.Scraped.create(result)
-        .then(function(dbArticle) {
-          // View the added result in the console
-          console.log(dbArticle);
-        })
-        .catch(function(err) {
-          // If an error occurred, send it to the client
-          return res.json(err);
-        });
+      db.Article.find({title: result.title}, function(err, data) 
+      {
+        if (data.length === 0) 
+        {
+          howMany++;
+          db.Article.create(result).then(function(dbArticle) 
+          {
+            // View the added result in the console
+            console.log(dbArticle);
+          })
+          .catch(function(err) 
+          {
+            // If an error occurred, send it to the client
+            return res.json(err);
+          });
+        }
     });
     // If we were able to successfully scrape and save an Article, send a message to the client
     res.send("Grabbed the newest " + howMany + " articles.");
@@ -78,7 +87,7 @@ app.get("/scrape", function(req, res) {
 // Route for getting all Articles from the db
 app.get("/scraperesults", function(req, res) {
   // Grab every document in the Articles collection
-  db.Scraped.find({})
+  db.Article.find({})
     .then(function(dbScraped) {
       // If we were able to successfully find Articles, send them back to the client
       res.json(dbScraped);
@@ -92,7 +101,7 @@ app.get("/scraperesults", function(req, res) {
 // Route for getting all Articles from the db
 app.get("/articles", function(req, res) {
   // Grab every document in the Articles collection
-  db.Article.find({})
+  db.Article.find({"saved":false})
     .then(function(dbArticle) {
       // If we were able to successfully find Articles, send them back to the client
       res.json(dbArticle);
@@ -103,7 +112,21 @@ app.get("/articles", function(req, res) {
     });
 });
 
-
+// Route for grabbing a specific Article by id, populate it with it's note
+app.get("/save/:id", function(req, res) {
+  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+  db.Article.findOneAndUpdate({ _id: req.params.id }, {$set:{saved:true}},{new:true},function(err, dbArticle)
+  {
+    if(err)
+    {
+        console.log("Something wrong when updating data!");
+    }
+    else
+    {
+      res.json(dbArticle);
+    }
+  });
+});
 
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {

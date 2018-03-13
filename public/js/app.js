@@ -89,14 +89,14 @@ function getArticles()
         myHTML += "<img style='border:1px solid gray;width:150px;height:100px; float:right' src=" + data[i].image +">";
         myHTML += "<p class='card-text'>" + data[i].story+ "</p>";
         myHTML += "<a href='" + data[i].link + "'" +"class='btn btn-primary' target='_blank'>View Article</a>";
-        myHTML += "<a href='/save' data-id='" + data[i]._id + "' class='btn btn-success'>Save Article</a></div></div>";
+        myHTML += "<a href='#' data-id='" + data[i]._id + "' class='btn btn-success'>Save Article</a></div></div>";
         $("#main").append(myHTML);
         //.append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].image +data[i].link + data[i].story + "<br />" + "</p>");
       };
     });
 }
 
-// Whenever someone clicks a p tag
+// Whenever someone scrapes
 $(document).on("click", "#scrapeButton", function() 
 {
   // Empty the notes from the note section
@@ -111,4 +111,30 @@ $(document).on("click", "#scrapeButton", function()
       $("#scrape-status").text(data);
       getArticles();
       });
+});
+
+// Whenever someone saves
+$(document).on("click", ".btn-success", function() 
+{
+  // Empty the notes from the note section
+  $("#scrape-status").empty();
+  // Now make an ajax call for the Articles
+  $.ajax({
+    method: "GET",
+    url: "/save:" + $(this).data("id") 
+  })
+    // With that done, add the note information to the page
+    .then(function(data) {
+      for (var i = 0; i < data.length; i++) {
+        // Display the apropos information on the page
+        var myHTML = "<div class='card' style='width: 70rem;'> <div class='card-body'>";
+        myHTML += "<h5 class='card-title'>" + data[i].title + "</h5>";
+        myHTML += "<img style='border:1px solid gray;width:150px;height:100px; float:right' src=" + data[i].image +">";
+        myHTML += "<p class='card-text'>" + data[i].story+ "</p>";
+        myHTML += "<a href='" + data[i].link + "'" +"class='btn btn-primary' target='_blank'>View Article</a>";
+        myHTML += "<a href='#' data-id='" + data[i]._id + "' class='btn btn-success'>Save Article</a></div></div>";
+        $("#main").append(myHTML);
+        //.append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].image +data[i].link + data[i].story + "<br />" + "</p>");
+      };
+    });
 });
