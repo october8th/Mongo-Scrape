@@ -57,13 +57,11 @@ app.get("/scrape", function(req, res)
       var link = $(element).children("div.info").children("div.info-wrap").children("p.heading").children("a.accent-hover").attr("href");
       var title = $(element).children("div.info").children("div.info-wrap").children("p.heading").children("a.accent-hover").children("span.accent-hover").text();
       var text = $(element).children("div.info").children("div.info-wrap").children("p.text").text();
-
       // Save these results in an object that we'll push into the results array we defined earlier
       result.image = image;
       result.title = title;
       result.link = "http://www.nintendolife.com/" + link;
       result.story = text;
-
       // Create a new Article using the `result` object built from scraping
       db.Article.find({title: result.title}, function(err, data) 
       {
@@ -73,7 +71,7 @@ app.get("/scrape", function(req, res)
           db.Article.create(result).then(function(dbArticle) 
           {
             // View the added result in the console
-            console.log(dbArticle);
+            //console.log(dbArticle);
           })
           .catch(function(err) 
           {
@@ -82,8 +80,9 @@ app.get("/scrape", function(req, res)
           });
         }
       });
-    }).then(res.send("Grabbed the newest " + howMany + " articles."));
+    });
   });
+  res.send("Grabbed the newest " + howMany + " articles.");
 });
 
 // Route for getting all Articles from the db
