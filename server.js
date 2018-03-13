@@ -81,8 +81,8 @@ app.get("/scrape", function(req, res)
         }
       });
     });
-  });
-  res.send("Grabbed the newest " + howMany + " articles.");
+  }).then(
+  res.send("Grabbed the newest " + howMany + " articles."));
 });
 
 // Route for getting all Articles from the db
