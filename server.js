@@ -58,10 +58,10 @@ app.get("/scrape", function(req, res)
       var title = $(element).children("div.info").children("div.info-wrap").children("p.heading").children("a.accent-hover").children("span.accent-hover").text();
       var text = $(element).children("div.info").children("div.info-wrap").children("p.text").text();
       // Save these results in an object that we'll push into the results array we defined earlier
-      result.image = image;
-      result.title = title;
+      result.image = image || "N/A";
+      result.title = title || "N/A";
       result.link = "http://www.nintendolife.com/" + link;
-      result.story = text;
+      result.story = text || "N/A";
       // Create a new Article using the `result` object built from scraping
       db.Article.find({title: result.title}, function(err, data) 
       {
