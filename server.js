@@ -40,21 +40,6 @@ app.get("/reset", function(req, res) {
     });
 });
 
-function createElement(element)
-{
-      var result = {};
-      var image =$(element).children("div.image").children("a.img").find("img").attr("src");
-      var link = $(element).children("div.info").children("div.info-wrap").children("p.heading").children("a.accent-hover").attr("href");
-      var title = $(element).children("div.info").children("div.info-wrap").children("p.heading").children("a.accent-hover").children("span.accent-hover").text();
-      var text = $(element).children("div.info").children("div.info-wrap").children("p.text").text();
-      // Save these results in an object that we'll push into the results array we defined earlier
-      result.image = image;
-      result.title = title;
-      result.link = "http://www.nintendolife.com/" + link;
-      result.story = text;
-      return(result);
-}
-
 // A GET route for scraping the echojs website
 app.get("/scrape", function(req, res) 
 {
@@ -68,7 +53,15 @@ app.get("/scrape", function(req, res)
     $("div.item-wrap").each(function(i, element) 
     {
       var result = {};
-      result = createElement(element);
+      var image =$(element).children("div.image").children("a.img").find("img").attr("src");
+      var link = $(element).children("div.info").children("div.info-wrap").children("p.heading").children("a.accent-hover").attr("href");
+      var title = $(element).children("div.info").children("div.info-wrap").children("p.heading").children("a.accent-hover").children("span.accent-hover").text();
+      var text = $(element).children("div.info").children("div.info-wrap").children("p.text").text();
+      // Save these results in an object that we'll push into the results array we defined earlier
+      result.image = image;
+      result.title = title;
+      result.link = "http://www.nintendolife.com/" + link;
+      result.story = text;
       // Create a new Article using the `result` object built from scraping
       db.Article.find({title: result.title}, function(err, data) 
       {
