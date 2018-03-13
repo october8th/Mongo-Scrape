@@ -100,6 +100,19 @@ function getNewArticles()
       showArticles(data)
     });
 }
+// Whenever someone views saved articles
+$(document).on("click", "#saved-link", function() 
+{
+  // Now make an ajax call for the Articles
+  $.ajax({
+    method: "GET",
+    url: "/saved"
+  })
+    // With that done, add the note information to the page
+    .then(function(data) {
+      showArticles(data);
+      });
+});
 
 // Whenever someone scrapes
 $(document).on("click", "#scrapeButton", function() 
