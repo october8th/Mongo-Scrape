@@ -127,5 +127,8 @@ $(document).on("click", ".btn-success", function()
     url: "/save/" + $(this).data("id") 
   })
     // With that done, add the note information to the page
-    .then(getNewArticles());
+    .then(function(data){
+      console.log(data);
+      getNewArticles();
+    });
 });
