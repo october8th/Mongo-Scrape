@@ -84,11 +84,12 @@ function getArticles()
     .then(function(data) {
       for (var i = 0; i < data.length; i++) {
         // Display the apropos information on the page
-        $("#main").append("<div class='card' style='width: 18rem;'> <div class='card-body'>");
-        $("#main").append("<h5 class='card-title'>" + data[i].title + "</h5>");
-        $("#main").append("<p class='card-text'>" + data[i].story+ "</p>");
-        $("#main").append("<a href='" + data[i].link + "'" +"class='btn btn-primary' target='_blank'>View Article</a>");
-        $("#main").append("<a href='/save" + "<p data-id='" + data[i]._id + "'>class='btn btn-primary'>Save Article</a></div></div>");
+        var myHTML = "<div class='card' style='width: 18rem;'> <div class='card-body'>";
+        myHTML += "<h5 class='card-title'>" + data[i].title + "</h5>";
+        myHTML += "<p class='card-text'>" + data[i].story+ "</p>";
+        myHTML += "<a href='" + data[i].link + "'" +"class='btn btn-primary' target='_blank'>View Article</a>";
+        myHTML += "<a href='/save" + " data-id='" + data[i]._id + "' class='btn btn-success'>Save Article</a></div></div>";
+        $("#main").append(myHTML);
         //.append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].image +data[i].link + data[i].story + "<br />" + "</p>");
       };
     });
