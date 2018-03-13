@@ -56,12 +56,7 @@ app.get("/scrape", function(req, res) {
       // Save these results in an object that we'll push into the results array we defined earlier
       result.image = image;
       result.title = title;
-      result.link = link;
-      result.story = text;
-
-      // Save these results in an object that we'll push into the results array we defined earlier
-      result.title = title;
-      result.link = link;
+      result.link = "http://www.nintendolife.com/" + link;
       result.story = text;
 
       // Create a new Article using the `result` object built from scraping
