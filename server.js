@@ -40,17 +40,8 @@ app.get("/reset", function(req, res) {
     });
 });
 
-// A GET route for scraping the echojs website
-app.get("/scrape", function(req, res) 
-{var howMany = 0;
-  // First, we grab the body of the html with request
-  axios.get("http://www.nintendolife.com/news/").then(function(response) 
-  {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
-    var $ = cheerio.load(response.data);
-    
-    $("div.item-wrap").each(function(i, element) 
-    {
+function createElement(element)
+{
       var result = {};
       var image =$(element).children("div.image").children("a.img").find("img").attr("src");
       var link = $(element).children("div.info").children("div.info-wrap").children("p.heading").children("a.accent-hover").attr("href");
@@ -61,27 +52,35 @@ app.get("/scrape", function(req, res)
       result.title = title;
       result.link = "http://www.nintendolife.com/" + link;
       result.story = text;
+      return(result);
+}
+
+// A GET route for scraping the echojs website
+app.get("/scrape", function(req, res) 
+{
+  var howMany = 0;
+  // First, we grab the body of the html with request
+  axios.get("http://www.nintendolife.com/news/").then(function(response) 
+  {
+    // Then, we load that into cheerio and save it to $ for a shorthand selector
+    var $ = cheerio.load(response.data);
+    
+    $("div.item-wrap").each(function(i, element) 
+    {
+      var result = {};
+      result = createElement(element);
       // Create a new Article using the `result` object built from scraping
       db.Article.find({title: result.title}, function(err, data) 
       {
         if (data.length === 0) 
         {
           howMany++;
-          db.Article.create(result).then(function(dbArticle) 
-          {
-            // View the added result in the console
-            //console.log(dbArticle);
-          })
-          .catch(function(err) 
-          {
-            // If an error occurred, send it to the client
-            //res.json(err);
-          });
+          db.Article.create(result);
         }
       });
     });
-  }).then(
-  res.send("Grabbed the newest " + howMany + " articles."));
+  });
+  res.send("Grabbed the newest " + howMany + " articles.");
 });
 
 // Route for getting all Articles from the db
