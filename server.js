@@ -127,6 +127,7 @@ app.get("/save/:id", function(req, res) {
     }
     else
     {
+      console.log("savedit");
       res.json(dbArticle);
     }
   });
