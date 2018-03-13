@@ -68,6 +68,7 @@ app.get("/scrape", function(req, res)
         if (data.length === 0) 
         {
           howMany++;
+          console.log(howMany);
           db.Article.create(result);
         }
       });
