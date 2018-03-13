@@ -67,13 +67,12 @@ app.get("/scrape", function(req, res)
       {
         if (data.length === 0) 
         {
-          howMany++;
-          console.log(howMany);
           db.Article.create(result);
         }
       });
     });
-    res.send("Grabbed the newest " + howMany + " articles.");
+  }).then(function(data){
+    res.send("Grabbed the newest " + howMany + " articles.")
   });
 });
 
