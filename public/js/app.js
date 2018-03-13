@@ -167,6 +167,8 @@ $(document).on('click', '.btn-default', (function()
 {
   // Empty the notes from the note section
   $("#note-section").empty();
+  var modal = $("#noteIt");
+  modal.modal();
   // Now make an ajax call for the Articles
   $.ajax({
     method: "GET",
