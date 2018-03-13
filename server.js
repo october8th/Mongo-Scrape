@@ -42,13 +42,12 @@ app.get("/reset", function(req, res) {
 
 // A GET route for scraping the echojs website
 app.get("/scrape", function(req, res) 
-{
+{var howMany = 0;
   // First, we grab the body of the html with request
   axios.get("http://www.nintendolife.com/news/").then(function(response) 
   {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
-    var howMany = 0;
     
     $("div.item-wrap").each(function(i, element) 
     {
