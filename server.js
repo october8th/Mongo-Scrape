@@ -40,10 +40,11 @@ app.get("/reset", function(req, res) {
     });
 });
 
+var howMany =0;
 // A GET route for scraping the echojs website
 app.get("/scrape", function(req, res) 
 {
-  var howMany = 0;
+  howMany = 0;
   // First, we grab the body of the html with request
   axios.get("http://www.nintendolife.com/news/").then(function(response) 
   {
