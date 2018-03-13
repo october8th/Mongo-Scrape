@@ -96,7 +96,9 @@ function getNewArticles()
     url: "/scraperesults"
   })
     // With that done, add the note information to the page
-    .then(showArticles(data));
+    .then(function(data) {
+      showArticles(data)
+    });
 }
 
 // Whenever someone scrapes
