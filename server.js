@@ -82,9 +82,7 @@ app.get("/scrape", function(req, res)
           });
         }
       });
-    });
-    // If we were able to successfully scrape and save an Article, send a message to the client
-    res.send("Grabbed the newest " + howMany + " articles.");
+    }).then(res.send("Grabbed the newest " + howMany + " articles."));
   });
 });
 
