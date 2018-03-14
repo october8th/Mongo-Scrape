@@ -1,5 +1,5 @@
 function showArticles(data)
-{console.log("data length: " + data.length);
+{
   // Empty the notes from the note section
   $("#main").empty();
   for (var i = 0; i < data.length; i++) {
@@ -16,7 +16,7 @@ function showArticles(data)
 }
 
 function showSaved(data)
-{console.log("data length: " + data.length);
+{
   // Empty the notes from the note section
   $("#main").empty();
   for (var i = 0; i < data.length; i++) {
@@ -111,7 +111,6 @@ function showNotesModal(data)
   {
     for (var i = 0; i < data.note.length; i++)
     {
-      console.log(data.note[i]);
       myHTML += "<div class='border border-light'>"
       myHTML += "<div class='anotetitle text-white'><p>" + data.note[i].title + "</p></div>";
       myHTML += "<div class='anotebody text-white'><p>" + data.note[i].body + "</p></div>";
@@ -161,8 +160,6 @@ $(document).on('click', '#addNote', function()
   var modal = $("#noteIt");
   modal.modal();
   var thisID = $(this).data("id");
-  console.log($("#notetitle").val());
-  console.log($("#notebody").val());
   // Now make an ajax call for the Articles
   $.ajax({
     method: "POST",
@@ -182,6 +179,7 @@ $(document).on('click', '#addNote', function()
       }))
     // With that done, add the note information to the page
     .then(function(data){
+      console.log(data);
     showNotesModal(data)});
 });
 
