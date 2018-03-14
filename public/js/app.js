@@ -122,9 +122,14 @@ function showNotesModal(data)
   {
     myHTML += "<div><h5> No notes posted yet </h5></div>";
   }
-  myHTML += "<div>Title:<input id='titleinput' name='title' ></div>"; // send the form to update a note
-  myHTML += "<div>Note:<textarea id='bodyinput' rows='4' name='body'></textarea></div>";
-  myHTML += "<div><button data-id='" + data._id + "' id='addNote'>Save Note</button></div>";
+  myHTML += "<div><form>"; // send the form to update a note
+  myHTML += "<div class='form-group row'>";
+  myHTML += "<label for='title'>Title:</label>";
+  myHTML += "<input type 'text' class='form-control' id='notetitle' placeholder='Title' name='notetitle' required></div>";
+  myHTML += "<div class='form-group row'>";
+  myHTML += "<label for='description'>Add a note:</label>";
+  myHTML += "<textarea class='form-control' id='notebody' rows='4' name='notebody' required>";
+  myHTML += "</textarea></div><input type='submit' value='Add New Note' id='addNote' data-id='" + data._id + "'></form><div>";
   $("#note-section").html(myHTML);
 }
 
@@ -151,23 +156,24 @@ $(document).on('click', '.btn-default', function()
 //add a note
 $(document).on('click', '#addNote', function() 
 {
+  event.preventDefault();
   // Empty the notes from the note section
   $("#note-section").empty();
   var modal = $("#noteIt");
   modal.modal();
   var thisID = $(this).data("id");
-  console.log($("#titeinput").val());
-  console.log($("#bodyinput").val());
-  console.log(document.getElementById("bodyinput").val());
+  console.log($("#notetitle").val());
+  console.log($("#notebody").val());
+  console.log(document.getElementById("notebody").val());
   // Now make an ajax call for the Articles
   $.ajax({
     method: "POST",
     url: "/save-note/" +  thisID,
     data: {
       // Value taken from title input
-      title: $("#titleinput").val(),
+      title: $("#notetitle").val(),
       // Value taken from note textarea
-      body: $("#bodyinput").val(),
+      body: $("#notebody").val(),
       smile:true
     }
   })
