@@ -164,6 +164,12 @@ $(document).on('click', '#addNote', function()
   $.ajax({
     method: "POST",
     url: "/save-note/" + $(this).data("id") 
+    data: {
+      // Value taken from title input
+      title: $("#title").val(),
+      // Value taken from note textarea
+      body: $("#body").val()
+    }
   })
     // With that done, add the note information to the page
     .then(
