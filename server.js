@@ -73,15 +73,14 @@ app.get("/scrape", function(req, res)
         else
         {
           howMany++;
-          if(i = $("div.item-wrap").length - 1)
-          {
-            res.send("You've grabbed the newest" + howMany + " articles.");
-          }
         }
       });
     });
   });
-});
+  response.send("You've grabbed the newest" + howMany + " articles.");
+}
+res.send("You've grabbed the newest" + howMany + " articles.");
+);
 
 // Route for getting all Articles from the db
 app.get("/scraperesults", function(req, res) {
