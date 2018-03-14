@@ -176,7 +176,27 @@ $(document).on('click', '.btn-default', (function()
   })
     // With that done, add the note information to the page
     .then(function(data) {
-      $("#note-section").text(data);
+      var myHTML;
+      if(data.note)
+      {
+        for (var i = 0; i < data.note.length; i++)
+        {
+          myHTML = "<div class='anotetitle'><p>" + data.note[i].title + "</p></div>";
+          myHTML += "<div class='anotebodh'><p>" + data.note[i].body + "</p></div>";
+          myHTML += "<a href='#' data-id='" + data.note[i]._id + "' class='btn btn-warn'>Delete Note</a></div></div>";
+        }
+      }
+      else
+      {
+        myHTML = "<div><h5> No notes posted yet </h5></div>";
+      }
+      var myHTML += "<div><form method='POST' action='/save-note'>"; // send the form to update a note
+      var myHTML += "<div class='form-group row'>";
+      var myHTML += "<label for='description'>Add a note:</label>";
+      var myHTML += "<textarea class='form-control' id='newNote' rows='4' name='newNote' required>";
+      var myHTML += "</textarea></div><input type='submit' value='Add New Note'></form><div>";
+      $("#note-section").html(myHTML);
       //getNewArticles();
-      });
-}));
+    });
+  })
+);
