@@ -68,16 +68,19 @@ app.get("/scrape", function(req, res)
         if(err)
         {
             console.log("Something wrong when updating data!");
+            console.log(err);
         }
         else
         {
           howMany++;
-          //res.json(data);
+          if(i = $("div.item-wrap").length)
+          {
+            res.send("You've grabbed the newest" + howMany + " articles.")
+          }
         }
       });
     });
   });
-  res.send("You've grabbed the newest" + howMany + " articles.")
 });
 
 // Route for getting all Articles from the db
