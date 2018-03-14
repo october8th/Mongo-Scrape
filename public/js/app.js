@@ -163,7 +163,7 @@ $(document).on('click', '#addNote', function()
   // Now make an ajax call for the Articles
   $.ajax({
     method: "POST",
-    url: "/save-note/" + $(this).data("id") 
+    url: "/save-note/" + $(this).data("id") ,
     data: {
       // Value taken from title input
       title: $("#title").val(),
