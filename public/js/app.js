@@ -128,7 +128,7 @@ function showNotesModal(data)
   myHTML += "<div class='form-group row'>";
   myHTML += "<label for='description'>Add a note:</label>";
   myHTML += "<textarea class='form-control' id='body' rows='4' name='body' required>";
-  myHTML += "</textarea></div><input type='submit' data-id='" + data.note[i]._id + "' value='Add New Note' id='addNote'></form><div>";
+  myHTML += "</textarea></div><input type='submit' data-id='" + data._id + "' value='Add New Note' id='addNote'></form><div>";
   $("#note-section").html(myHTML);
 }
 
