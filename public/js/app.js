@@ -154,7 +154,7 @@ $(document).on('click', '.btn-default', function()
 });
 
 //add a note
-$(document).on('click', '#addNote', function() 
+$(document).on('submit', '#addNote', function() 
 {
   event.preventDefault();
   // Empty the notes from the note section
