@@ -121,18 +121,16 @@ function showNotesModal(data)
   {
     myHTML += "<div><h5> No notes posted yet </h5></div>";
   }
-  myHTML += "<div><form>"; // send the form to update a note
+  myHTML += "<div><form method='POST' action='/save-note/" + data._id+ "'>"; // send the form to update a note
   myHTML += "<div class='form-group row'>";
   myHTML += "<label for='title'>Title:</label>";
   myHTML += "<input type 'text' class='form-control' id='title' placeholder='Title' name='title' required></div>";
   myHTML += "<div class='form-group row'>";
   myHTML += "<label for='description'>Add a note:</label>";
   myHTML += "<textarea class='form-control' id='body' rows='4' name='body' required>";
-  myHTML += "</textarea></div><input type='submit' data-id='" + data.note[i]._id + "' value='Add New Note' id='addNote'></form><div>";
+  myHTML += "</textarea></div><input type='submit' value='Add New Note'></form><div>";
   $("#note-section").html(myHTML);
 }
-
-var currentID;
 
 //view the notes
 $(document).on('click', '.btn-default', function() 
@@ -141,35 +139,11 @@ $(document).on('click', '.btn-default', function()
   $("#note-section").empty();
   var modal = $("#noteIt");
   modal.modal();
-  // Now make an ajax call for the Article
-  currentID = $(this).data("id");
+  // Now make an ajax call for the Articles
   $.ajax({
     method: "GET",
     url: "/note/" + $(this).data("id") 
   })
-    // With that done, add the note information to the page
-    .then(function(data){
-    showNotesModal(data)});
-});
-
-//add a note
-$(document).on('click', '#addNote', function() 
-{
-  // Empty the notes from the note section
-  $("#note-section").empty();
-  var modal = $("#noteIt");
-  modal.modal();
-  // Now make an ajax call for the Articles
-  $.ajax({
-    method: "POST",
-    url: "/save-note/" + $(this).data("id") 
-  })
-    // With that done, add the note information to the page
-    .then(
-      $.ajax({
-        method: "GET",
-        url: "/note/" + currentID
-      })
     // With that done, add the note information to the page
     .then(function(data){
     showNotesModal(data)});
@@ -187,12 +161,6 @@ $(document).on('click', '.btn-warn', function()
     method: "GET",
     url: "/delete/" + $(this).data("id") 
   })
-    // With that done, add the note information to the page
-    .then(
-      $.ajax({
-        method: "GET",
-        url: "/note/" + currentID
-      })
     // With that done, add the note information to the page
     .then(function(data){
     showNotesModal(data)});
