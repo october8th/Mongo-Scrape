@@ -204,5 +204,5 @@ $(document).on('click', '.btn-warn', function()
       })
     // With that done, add the note information to the page
     .then(function(data){
-    showNotesModal(data)});
+    showNotesModal(data)}));
 });
