@@ -14,6 +14,7 @@ var ArticleSchema = new Schema({
   // `title` is required and of type String
   title: {
     type: String,
+    unique: true,
     required: true
   },
   // `link` is required and of type String

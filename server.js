@@ -50,7 +50,7 @@ app.get("/scrape", function(req, res)
   {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
-    
+    var howMany = 0;
     $("div.item-wrap").each(function(i, element) 
     {
       var result = {};
@@ -63,17 +63,21 @@ app.get("/scrape", function(req, res)
       result.title = title || "N/A";
       result.link = "http://www.nintendolife.com/" + link;
       result.story = text || "N/A";
-      // Create a new Article using the `result` object built from scraping
-      db.Article.find({title: result.title}, function(err, data) 
+      db.Article.create(result, function(err, data)
       {
-        if (data.length === 0) 
+        if(err)
         {
-          db.Article.create(result);
+            console.log("Something wrong when updating data!");
+        }
+        else
+        {
+          howMany++;
+          res.json(dbArticle);
         }
       });
     });
   });
-  res.send("You've grabbed the newest articles.")
+  res.send("You've grabbed the newest" + howMany + " articles.")
 });
 
 // Route for getting all Articles from the db
