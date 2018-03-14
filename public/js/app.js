@@ -111,6 +111,7 @@ function showNotesModal(data)
   {
     for (var i = 0; i < data.note.length; i++)
     {
+      console.log(data.note[i]);
       myHTML += "<div class='border border-light'>"
       myHTML += "<div class='anotetitle text-white'><p>" + data.note[i].title + "</p></div>";
       myHTML += "<div class='anotebodh text-white'><p>" + data.note[i].body + "</p></div>";
