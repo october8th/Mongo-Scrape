@@ -75,7 +75,7 @@ app.get("/scrape", function(req, res)
           howMany++;
           if(i = $("div.item-wrap").length - 1)
           {
-            res.send("You've grabbed the newest" + howMany + " articles.")
+            res.send("You've grabbed the newest" + howMany + " articles.");
           }
         }
       });
