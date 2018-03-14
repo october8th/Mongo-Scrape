@@ -177,7 +177,35 @@ $(document).on("click", ".btn-success", function()
     });
 });
 
-$(document).on('click', '.btn-default', (function() 
+function showNotesModal(data)
+{
+  var myHTML = "<div><h5> Notes: </h5></div>";
+  if(data.note.length)
+  {
+    for (var i = 0; i < data.note.length; i++)
+    {
+      myHTML += "<div class='border border-light'>"
+      myHTML += "<div class='anotetitle text-white'><p>" + data.note[i].title + "</p></div>";
+      myHTML += "<div class='anotebodh text-white'><p>" + data.note[i].body + "</p></div>";
+      myHTML += "<a href='#' data-id='" + data.note[i]._id + "' class='btn btn-warn'>Delete Note</a></div></div></div>";
+    }
+  }
+  else
+  {
+    myHTML += "<div><h5> No notes posted yet </h5></div>";
+  }
+  myHTML += "<div><form method='POST' action='/save-note/" + data._id+ "'>"; // send the form to update a note
+  myHTML += "<div class='form-group row'>";
+  myHTML += "<label for='title'>Title:</label>";
+  myHTML += "<input type 'text' class='form-control' id='title' placeholder='Title' name='title' required></div>";
+  myHTML += "<div class='form-group row'>";
+  myHTML += "<label for='description'>Add a note:</label>";
+  myHTML += "<textarea class='form-control' id='body' rows='4' name='body' required>";
+  myHTML += "</textarea></div><input type='submit' value='Add New Note'></form><div>";
+  $("#note-section").html(myHTML);
+}
+
+$(document).on('click', '.btn-default', function() 
 {
   // Empty the notes from the note section
   $("#note-section").empty();
@@ -189,32 +217,20 @@ $(document).on('click', '.btn-default', (function()
     url: "/note/" + $(this).data("id") 
   })
     // With that done, add the note information to the page
-    .then(function(data) {
-      var myHTML;
-      if(data.note.length)
-      {
-        for (var i = 0; i < data.note.length; i++)
-        {
-          myHTML = "<div class='anotetitle'><p>" + data.note[i].title + "</p></div>";
-          myHTML += "<div class='anotebodh'><p>" + data.note[i].body + "</p></div>";
-          myHTML += "<a href='#' data-id='" + data.note[i]._id + "' class='btn btn-warn'>Delete Note</a></div></div>";
-        }
-      }
-      else
-      {
-        myHTML = "<div><h5> No notes posted yet </h5></div>";
-      }
-      myHTML += "<div><form method='POST' action='/save-note/" + data._id+ "'>"; // send the form to update a note
-      myHTML += "<div class='form-group row'>";
-      myHTML += "<label for='title'>Title:</label>";
-      myHTML += "<input type 'text' class='form-control' id='title' placeholder='Title' name='title' required></div>";
-      myHTML += "<div class='form-group row'>";
-      myHTML += "<label for='description'>Add a note:</label>";
-      myHTML += "<textarea class='form-control' id='body' rows='4' name='body' required>";
-      myHTML += "</textarea></div><input type='submit' value='Add New Note'></form><div>";
-      $("#note-section").html(myHTML);
-      //console.log(data);
-      //getNewArticles();
-    });
+    .then(showNotesModal(data));
+});
+
+$(document).on('click', '.btn-warn', function() 
+{
+  // Empty the notes from the note section
+  $("#note-section").empty();
+  var modal = $("#noteIt");
+  modal.modal();
+  // Now make an ajax call for the Articles
+  $.ajax({
+    method: "GET",
+    url: "/delete/" + $(this).data("id") 
   })
-);
+    // With that done, add the note information to the page
+    .then(showNotesModal(data));
+});
