@@ -146,7 +146,7 @@ $(document).on('click', '.btn-default', function()
   currentID = $(this).data("id");
   $.ajax({
     method: "GET",
-    url: "/note/" + $(this).data("id") 
+    url: "/note/" + currentID 
   })
     // With that done, add the note information to the page
     .then(function(data){
@@ -162,12 +162,11 @@ $(document).on('click', '#addNote', function()
   modal.modal();
   var thisID = $(this).data("id");
   console.log($("#notetitle").val());
-  console.log($("#notetitle").val());
-  console.log(document.getElementById("notebody").val());
+  console.log($("#notebody").val());
   // Now make an ajax call for the Articles
   $.ajax({
     method: "POST",
-    url: "/save-note/" +  thisID,
+    url: "/save-note/" +  currentID,
     data: {
       // Value taken from title input
       title: $("#notetitle").val(),
