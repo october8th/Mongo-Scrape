@@ -156,15 +156,17 @@ $(document).on('click', '#addNote', function()
   var modal = $("#noteIt");
   modal.modal();
   var thisID = $(this).data("id");
+  console.log($("#titeinput").val());
+  console.log($("#bodyinput").val());
   // Now make an ajax call for the Articles
   $.ajax({
     method: "POST",
     url: "/save-note/" +  thisID,
     data: {
       // Value taken from title input
-      title: $("#notetitle").val(),
+      title: $("#titleinput").val(),
       // Value taken from note textarea
-      body: $("#notebody").val(),
+      body: $("#bodyinput").val(),
       smile:true
     }
   })
