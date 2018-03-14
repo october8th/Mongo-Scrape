@@ -125,10 +125,10 @@ function showNotesModal(data)
   myHTML += "<div><form>"; // send the form to update a note
   myHTML += "<div class='form-group row'>";
   myHTML += "<label for='title'>Title:</label>";
-  myHTML += "<input type 'text' class='form-control' id='title' placeholder='Title' name='title' required></div>";
+  myHTML += "<input type 'text' class='form-control' id='notetitle' placeholder='Title' name='title' required></div>";
   myHTML += "<div class='form-group row'>";
   myHTML += "<label for='description'>Add a note:</label>";
-  myHTML += "<textarea class='form-control' id='body' rows='4' name='body' required>";
+  myHTML += "<textarea class='form-control' id='body' rows='4' name='notebody' required>";
   myHTML += "</textarea></div><input type='submit' data-id='" + data._id + "' value='Add New Note' id='addNote'></form><div>";
   $("#note-section").html(myHTML);
 }
@@ -166,9 +166,9 @@ $(document).on('click', '#addNote', function()
     url: "/save-note/" + $(this).data("id") ,
     data: {
       // Value taken from title input
-      title: $("#title").val(),
+      title: $("#notetitle").val(),
       // Value taken from note textarea
-      body: $("#body").val()
+      body: $("#notebody").val()
     }
   })
     // With that done, add the note information to the page
