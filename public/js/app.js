@@ -132,6 +132,20 @@ $(document).on("click", "#saved-link", function()
       });
 });
 
+// Whenever someone views saved articles
+$(document).on("click", "#home-but", function() 
+{
+  // Now make an ajax call for the Articles
+  $.ajax({
+    method: "GET",
+    url: "/scraperesults"
+  })
+     // With that done, add the note information to the page
+    .then(function(data) {
+      showArticles(data)
+    });
+}
+
 // Whenever someone scrapes
 $(document).on("click", "#scrapeButton", function() 
 {

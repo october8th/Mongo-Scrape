@@ -67,8 +67,7 @@ app.get("/scrape", function(req, res)
       {
         if(err)
         {
-            console.log("Something wrong when updating data!");
-            console.log(err);
+            console.log("This is probably a dupicate");
         }
         else
         {
@@ -76,9 +75,9 @@ app.get("/scrape", function(req, res)
         }
       });
     });
-    response.send("You've grabbed the newest" + howMany + " articles.");
+    response.send("You've grabbed the newest articles.");
   });
-  res.send("You've grabbed the newest" + howMany + " articles.");
+  res.send("You've grabbed the newest articles.");
 });
 
 // Route for getting all Articles from the db
