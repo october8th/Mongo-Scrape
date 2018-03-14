@@ -122,14 +122,9 @@ function showNotesModal(data)
   {
     myHTML += "<div><h5> No notes posted yet </h5></div>";
   }
-  myHTML += "<div><form>"; // send the form to update a note
-  myHTML += "<div class='form-group row'>";
-  myHTML += "<label for='title'>Title:</label>";
-  myHTML += "<input type 'text' class='form-control' id='notetitle' placeholder='Title' name='title' required></div>";
-  myHTML += "<div class='form-group row'>";
-  myHTML += "<label for='description'>Add a note:</label>";
-  myHTML += "<textarea class='form-control' id='body' rows='4' name='notebody' required>";
-  myHTML += "</textarea></div><input type='submit' data-id='" + data._id + "' value='Add New Note' id='addNote'></form><div>";
+  myHTML += "<div><input id='titleinput' name='title' >"; // send the form to update a note
+  myHTML += "<textarea id='bodyinput' name='body'></textarea>";
+  myHTML += "<button data-id='" + data._id + "' id='addNote'>Save Note</button><div>";
   $("#note-section").html(myHTML);
 }
 
@@ -160,15 +155,17 @@ $(document).on('click', '#addNote', function()
   $("#note-section").empty();
   var modal = $("#noteIt");
   modal.modal();
+  var thisID = $(this).data("id");
   // Now make an ajax call for the Articles
   $.ajax({
     method: "POST",
-    url: "/save-note/" + $(this).data("id") ,
+    url: "/save-note/" +  thisID,
     data: {
       // Value taken from title input
       title: $("#notetitle").val(),
       // Value taken from note textarea
-      body: $("#notebody").val()
+      body: $("#notebody").val(),
+      smile:true
     }
   })
     // With that done, add the note information to the page
