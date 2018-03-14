@@ -152,10 +152,21 @@ $(document).on('click', '.btn-default', function()
     showNotesModal(data)});
 });
 
+function ajaxTheNote()
+{
+  $.ajax({
+        method: "GET",
+        url: "/note/" + currentID
+      })
+    // With that done, add the note information to the page
+    .then(function(data){
+    showNotesModal(data)});
+};
+
 //add a note
 $(document).on('click', '#addNote', function() 
 {
-  event.preventDefault();
+  //event.preventDefault();
   // Empty the notes from the note section
   var modal = $("#noteIt");
   modal.modal();
@@ -172,15 +183,8 @@ $(document).on('click', '#addNote', function()
     }
   })
     // With that done, add the note information to the page
-    .then(
-      $.ajax({
-        method: "GET",
-        url: "/note/" + currentID
-      })
-    // With that done, add the note information to the page
-    .then(function(data){
-    showNotesModal(data)}));
-});
+    .done(ajaxTheNote());
+};
 
 
 //delete a note
