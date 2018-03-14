@@ -128,8 +128,8 @@ function showNotesModal(data)
   myHTML += "<input type 'text' class='form-control' id='notetitle' placeholder='Title' name='notetitle' required></div>";
   myHTML += "<div class='form-group row'>";
   myHTML += "<label for='description'>Add a note:</label>";
-  myHTML += "<textarea class='form-control' id='notebody' rows='4' name='notebody' required>";
-  myHTML += "</textarea></div><input type='submit' value='Add New Note' id='addNote' data-id='" + data._id + "'></form><div>";
+  myHTML += "<textarea class='form-control' id='notebody' rows='4' name='notebody' required></textarea></div>";
+  myHTML += "<input type='submit' value='Add New Note' id='addNote' data-id='" + data._id + "'></form><div>";
   $("#note-section").html(myHTML);
 }
 
@@ -154,13 +154,17 @@ $(document).on('click', '.btn-default', function()
 });
 
 //add a note
-$(document).on('submit', '#addNote', function() 
+$(document).ready(function() 
 {
-  event.preventDefault();
+  $("#addNote").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
   // Empty the notes from the note section
   var modal = $("#noteIt");
   modal.modal();
   var thisID = $(this).data("id");
+  console.log($("#notetitle").val());
+  console.log($("#notebody").val());
   console.log(document.getElementById("notebody").val());
   // Now make an ajax call for the Articles
   $.ajax({
@@ -171,7 +175,6 @@ $(document).on('submit', '#addNote', function()
       title: $("#notetitle").val(),
       // Value taken from note textarea
       body: $("#notebody").val(),
-      smile:true
     }
   })
     // With that done, add the note information to the page
@@ -183,6 +186,7 @@ $(document).on('submit', '#addNote', function()
     // With that done, add the note information to the page
     .then(function(data){
     showNotesModal(data)});
+  });
 });
 
 //delete a note
