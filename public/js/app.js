@@ -158,6 +158,7 @@ $(document).on('click', '#addNote', function()
   var thisID = $(this).data("id");
   console.log($("#titeinput").val());
   console.log($("#bodyinput").val());
+  console.log(document.getElementById("bodyinput").val());
   // Now make an ajax call for the Articles
   $.ajax({
     method: "POST",
