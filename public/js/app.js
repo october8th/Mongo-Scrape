@@ -169,7 +169,7 @@ $(document).on('click', '#addNote', function()
       $.ajax({
         method: "GET",
         url: "/note/" + currentID
-      })
+      }))
     // With that done, add the note information to the page
     .then(function(data){
     showNotesModal(data)});
@@ -192,7 +192,7 @@ $(document).on('click', '.btn-warn', function()
       $.ajax({
         method: "GET",
         url: "/note/" + currentID
-      })
+      }))
     // With that done, add the note information to the page
     .then(function(data){
     showNotesModal(data)});
