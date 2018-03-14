@@ -144,7 +144,7 @@ $(document).on("click", "#home-but", function()
     .then(function(data) {
       showArticles(data)
     });
-};
+});
 
 // Whenever someone scrapes
 $(document).on("click", "#scrapeButton", function() 
