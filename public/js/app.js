@@ -184,7 +184,7 @@ $(document).on('click', '#addNote', function()
   })
     // With that done, add the note information to the page
     .done(ajaxTheNote());
-};
+});
 
 
 //delete a note
