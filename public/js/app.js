@@ -191,7 +191,7 @@ $(document).on('click', '.btn-default', (function()
     // With that done, add the note information to the page
     .then(function(data) {
       var myHTML;
-      if(data.note)
+      if(data.note.length)
       {
         for (var i = 0; i < data.note.length; i++)
         {
@@ -206,11 +206,22 @@ $(document).on('click', '.btn-default', (function()
       }
       myHTML += "<div><form method='POST' action='/save-note'>"; // send the form to update a note
       myHTML += "<div class='form-group row'>";
+      myHTML += "<label for='title'>Title:</label>";
+      myHTML += "<input type 'text' class='form-control' id='newTitle' placeholder='Title' name='newTitle' required></div>";
+      myHTML += "<div class='form-group row'>";
       myHTML += "<label for='description'>Add a note:</label>";
       myHTML += "<textarea class='form-control' id='newNote' rows='4' name='newNote' required>";
       myHTML += "</textarea></div><input type='submit' value='Add New Note'></form><div>";
       $("#note-section").html(myHTML);
+      console.log(data);
       //getNewArticles();
     });
   })
 );
+
+
+          <label for="location" class="col-lg-2 col-form-label">Dream Zip Code:</label>
+          <div class="col-lg-10">
+            <input type="text" name="location" class="form-control" id="location" placeholder="12345" required>
+          </div>
+        </div>
