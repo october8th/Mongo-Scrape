@@ -105,7 +105,7 @@ $(document).on("click", ".btn-success", function()
 });
 
 function showNotesModal(data)
-{
+{$("#note-section").empty();
   var myHTML = "<div><h5> Notes: </h5></div>";
   if(data.note.length)
   {
@@ -139,7 +139,7 @@ var currentID;
 $(document).on('click', '.btn-default', function() 
 {
   // Empty the notes from the note section
-  $("#note-section").empty();
+  
   var modal = $("#noteIt");
   modal.modal();
   // Now make an ajax call for the Article
@@ -158,12 +158,9 @@ $(document).on('submit', '#addNote', function()
 {
   event.preventDefault();
   // Empty the notes from the note section
-  $("#note-section").empty();
   var modal = $("#noteIt");
   modal.modal();
   var thisID = $(this).data("id");
-  console.log($("#notetitle").val());
-  console.log($("#notebody").val());
   console.log(document.getElementById("notebody").val());
   // Now make an ajax call for the Articles
   $.ajax({
