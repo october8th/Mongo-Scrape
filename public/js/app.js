@@ -204,16 +204,16 @@ $(document).on('click', '.btn-default', (function()
       {
         myHTML = "<div><h5> No notes posted yet </h5></div>";
       }
-      myHTML += "<div><form method='POST' action='/save-note'>"; // send the form to update a note
+      myHTML += "<div><form method='POST' action='/save-note/" + data._id+ "'>"; // send the form to update a note
       myHTML += "<div class='form-group row'>";
       myHTML += "<label for='title'>Title:</label>";
-      myHTML += "<input type 'text' class='form-control' id='newTitle' placeholder='Title' name='newTitle' required></div>";
+      myHTML += "<input type 'text' class='form-control' id='title' placeholder='Title' name='title' required></div>";
       myHTML += "<div class='form-group row'>";
       myHTML += "<label for='description'>Add a note:</label>";
-      myHTML += "<textarea class='form-control' id='newNote' rows='4' name='newNote' required>";
+      myHTML += "<textarea class='form-control' id='body' rows='4' name='body' required>";
       myHTML += "</textarea></div><input type='submit' value='Add New Note'></form><div>";
       $("#note-section").html(myHTML);
-      console.log(data);
+      //console.log(data);
       //getNewArticles();
     });
   })
