@@ -218,10 +218,3 @@ $(document).on('click', '.btn-default', (function()
     });
   })
 );
-
-
-          <label for="location" class="col-lg-2 col-form-label">Dream Zip Code:</label>
-          <div class="col-lg-10">
-            <input type="text" name="location" class="form-control" id="location" placeholder="12345" required>
-          </div>
-        </div>
