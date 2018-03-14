@@ -104,7 +104,7 @@ function showSaved(data)
     $("#main").append(myHTML);
     //.append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].image +data[i].link + data[i].story + "<br />" + "</p>");
   };
-}
+};
 
 function getNewArticles()
 {
@@ -117,7 +117,7 @@ function getNewArticles()
     .then(function(data) {
       showArticles(data)
     });
-}
+};
 // Whenever someone views saved articles
 $(document).on("click", "#saved-link", function() 
 {
@@ -144,7 +144,7 @@ $(document).on("click", "#home-but", function()
     .then(function(data) {
       showArticles(data)
     });
-}
+};
 
 // Whenever someone scrapes
 $(document).on("click", "#scrapeButton", function() 
