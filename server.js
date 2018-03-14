@@ -145,7 +145,7 @@ app.get("/note/:id", function(req, res) {
 
 
 // Route for deleting/updating an Article's associated Note
-app.post("/delete/:id", function(req, res) {
+app.get("/delete/:id", function(req, res) {
   // Create a new note and pass the req.body to the entry
   db.Note.findOneAndRemove({_id: req.params.id})
     .then(function(dbNote) {
