@@ -114,7 +114,7 @@ function showNotesModal(data)
       console.log(data.note[i]);
       myHTML += "<div class='border border-light'>"
       myHTML += "<div class='anotetitle text-white'><p>" + data.note[i].title + "</p></div>";
-      myHTML += "<div class='anotebodh text-white'><p>" + data.note[i].body + "</p></div>";
+      myHTML += "<div class='anotebody text-white'><p>" + data.note[i].body + "</p></div>";
       myHTML += "<a href='#' data-id='" + data.note[i]._id + "' class='btn btn-warn'>Delete Note</a></div></div></div>";
     }
   }
@@ -122,9 +122,9 @@ function showNotesModal(data)
   {
     myHTML += "<div><h5> No notes posted yet </h5></div>";
   }
-  myHTML += "<div><input id='titleinput' name='title' >"; // send the form to update a note
-  myHTML += "<textarea id='bodyinput' name='body'></textarea>";
-  myHTML += "<button data-id='" + data._id + "' id='addNote'>Save Note</button><div>";
+  myHTML += "<div>Title:<input id='titleinput' name='title' ></div>"; // send the form to update a note
+  myHTML += "<div>Note:<textarea id='bodyinput' rows='4' name='body'></textarea></div>";
+  myHTML += "<div><button data-id='" + data._id + "' id='addNote'>Save Note</button></div>";
   $("#note-section").html(myHTML);
 }
 
