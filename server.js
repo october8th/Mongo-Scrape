@@ -72,7 +72,7 @@ app.get("/scrape", function(req, res)
         else
         {
           howMany++;
-          res.json(dbArticle);
+          res.json(data);
         }
       });
     });
