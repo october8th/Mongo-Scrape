@@ -217,7 +217,8 @@ $(document).on('click', '.btn-default', function()
     url: "/note/" + $(this).data("id") 
   })
     // With that done, add the note information to the page
-    .then(showNotesModal(data));
+    .then(function(data){
+    showNotesModal(data)});
 });
 
 $(document).on('click', '.btn-warn', function() 
@@ -232,5 +233,6 @@ $(document).on('click', '.btn-warn', function()
     url: "/delete/" + $(this).data("id") 
   })
     // With that done, add the note information to the page
-    .then(showNotesModal(data));
+    .then(function(data){
+    showNotesModal(data)});
 });
