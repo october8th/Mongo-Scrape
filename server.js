@@ -73,7 +73,7 @@ app.get("/scrape", function(req, res)
         else
         {
           howMany++;
-          if(i = $("div.item-wrap").length)
+          if(i = $("div.item-wrap").length - 1)
           {
             res.send("You've grabbed the newest" + howMany + " articles.")
           }
